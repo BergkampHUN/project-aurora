@@ -25,3 +25,19 @@ body {
   --surface-card: #ffffff;
   --surface-ground: #eff3f8;
 }
+
+// ************ Helpes Classes ************
+
+.flexbox-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.time-bold {
+  font-family: "Chivo Mono";
+  font-weight: 700;
+}
+
+.text-semi-bold {
+  font-weight: 600;
+}
