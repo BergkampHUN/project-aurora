@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 
 import { ButtonModule } from 'primeng/button';
 import { HeaderComponent } from './header/header.component';
+import { TimerComponent } from './timer/timer.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, TimerComponent],
   imports: [BrowserModule, AppRoutingModule, ButtonModule],
   providers: [],
   bootstrap: [AppComponent],
