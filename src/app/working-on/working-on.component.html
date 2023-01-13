@@ -1,0 +1,42 @@
+<div class="flexbox-space-between default-card">
+  <form [formGroup]="workingOnForm" class="working-on-form text-semi-bold">
+    <div>Project name</div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-angle-down"
+      class="p-button-rounded p-button-primary p-button-text"
+    ></button>
+    <div>
+      <span>/</span>
+    </div>
+    <div>Service</div>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-angle-down"
+      class="p-button-rounded p-button-primary p-button-text"
+    ></button>
+    <span>/</span>
+    <div>
+      <input
+        type="text"
+        placeholder="What are you working on?"
+        class="working-on-input"
+        formControlName="workingOnInput"
+      />
+    </div>
+  </form>
+  <div class="working-on-right-side">
+    <app-timer></app-timer>
+    <button
+      pButton
+      pRipple
+      type="button"
+      icon="pi pi-stop-circle"
+      class="p-button-rounded p-button-secondary p-button-text"
+    ></button>
+  </div>
+</div>

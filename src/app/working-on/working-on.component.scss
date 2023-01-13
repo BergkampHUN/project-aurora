@@ -1,0 +1,26 @@
+.working-on-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+}
+
+.working-on-form span {
+  margin-right: 10px;
+}
+
+.working-on-right-side {
+  display: flex;
+  align-items: center;
+}
+
+.working-on-input {
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0);
+  border: none;
+  outline: none;
+}
+
+.working-on-input::placeholder {
+  color: var(--text-color-secondary);
+}

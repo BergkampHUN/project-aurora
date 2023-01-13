@@ -26,6 +26,14 @@ body {
   --surface-ground: #eff3f8;
 }
 
+.default-card {
+  background-color: var(--surface-card);
+  padding: 10px 28px;
+  border: 1px solid var(--sufrace-border);
+  border-radius: 10px;
+  align-items: center;
+}
+
 // ************ Helpes Classes ************
 
 .flexbox-space-between {

@@ -1,11 +1,12 @@
 .main-header {
-  padding: 28px;
+  margin-top: 28px;
   color: var(--text-color-secondary);
+  align-items: center;
 }
 
 .main-header-right-side {
   display: flex;
-  align-items: center;
+
   gap: 16px;
 }
 
