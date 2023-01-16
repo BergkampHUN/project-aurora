@@ -1,24 +1,20 @@
 <div class="flexbox-space-between default-card">
   <form [formGroup]="workingOnForm" class="working-on-form text-semi-bold">
-    <div>Project name</div>
-    <button
-      pButton
-      pRipple
-      type="button"
-      icon="pi pi-angle-down"
-      class="p-button-rounded p-button-primary p-button-text"
-    ></button>
+    <p-dropdown
+      [options]="projects"
+      formControlName="projectName"
+      optionLabel="name"
+      placeholder="Project Name"
+    ></p-dropdown>
     <div>
       <span>/</span>
     </div>
-    <div>Service</div>
-    <button
-      pButton
-      pRipple
-      type="button"
-      icon="pi pi-angle-down"
-      class="p-button-rounded p-button-primary p-button-text"
-    ></button>
+    <p-dropdown
+      [options]="services"
+      formControlName="service"
+      optionLabel="name"
+      placeholder="Service"
+    ></p-dropdown>
     <span>/</span>
     <div>
       <input
