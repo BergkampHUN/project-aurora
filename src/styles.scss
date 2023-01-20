@@ -55,16 +55,15 @@ body {
   margin: 0 15px 0 0;
   color: var(--text-color);
   font-weight: 700;
-}
 
-.p-dropdown .p-dropdown-label.p-placeholder {
-  color: var(--text-color);
-}
-
-.p-dropdown .p-dropdown-trigger {
-  color: var(--primary);
+  .p-dropdown-trigger {
+    color: var(--primary);
+  }
 }
 
 .p-dropdown .p-dropdown-label {
   color: var(--text-color);
+  &.p-placeholder {
+    color: var(--text-color);
+  }
 }
