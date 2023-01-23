@@ -1,1 +1,92 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--surface-ground);
+}
+
+:root {
+  --text-color: #1e293b;
+  --text-color-secondary: #64748b;
+  --primary: #3b82f6;
+  --cyan-500: #06b6d4;
+  --cyan-100: #c3edf5;
+  --purple-500: #a855f7;
+  --purple-100: #ead6fd;
+  --success: #22c55e;
+  --alert: #f59e0b;
+  --table-header: #f8fafc;
+  --sufrace-border: #dfe7ef;
+  --surface-card: #ffffff;
+  --surface-ground: #eff3f8;
+}
+
+.default-card {
+  background-color: var(--surface-card);
+  padding: 10px 28px;
+  border: 1px solid var(--sufrace-border);
+  border-radius: 10px;
+  align-items: center;
+}
+
+// ************ Helpes Classes ************
+.flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.time-bold {
+  font-family: "Chivo Mono";
+  font-weight: 700;
+}
+
+.text-semi-bold {
+  font-weight: 600;
+}
+
+// ************ Custom Prime-NG styles ************
+
+.p-dropdown {
+  border: none;
+  margin: 0 15px 0 0;
+  color: var(--text-color);
+  font-weight: 700;
+
+  .p-dropdown-trigger {
+    color: var(--primary);
+  }
+
+  .p-dropdown-label {
+    color: var(--text-color);
+    &.p-placeholder {
+      color: var(--text-color);
+    }
+  }
+}
+
+.p-inputtext {
+  &.no-border {
+    background: transparent;
+    border: none;
+    outline: none;
+
+    &:enabled {
+      &:focus {
+        box-shadow: none;
+        border: none;
+      }
+    }
+  }
+}
