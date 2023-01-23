@@ -35,10 +35,16 @@ body {
 }
 
 // ************ Helpes Classes ************
-
-.flexbox-space-between {
+.flex {
   display: flex;
+}
+
+.justify-content-between {
   justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: center;
 }
 
 .time-bold {
