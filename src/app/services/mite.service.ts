@@ -6,6 +6,7 @@ import {
   EditTimeEntry,
   Project,
   ProjectResponseObj,
+  Service,
   ServiceResponseObj,
   TimeEntryResponseObj,
   TrackerResponse,
@@ -43,11 +44,17 @@ export class MiteService {
       );
   }
 
-  public getServices(): Observable<ServiceResponseObj[]> {
+  public getServices(): Observable<Service[]> {
     // TODO: mapping the responses later to remove the object keys
-    return this.http.get<ServiceResponseObj[]>(`${this.baseUrl}/services.json`, {
-      headers: this.headers,
-    });
+    return this.http
+      .get<ServiceResponseObj[]>(`${this.baseUrl}/services.json`, {
+        headers: this.headers,
+      })
+      .pipe(
+        map((servicesArray) => {
+          return servicesArray.map((serviceObj) => serviceObj.service);
+        })
+      );
   }
 
   public getTracker(): Observable<TrackerResponse> {
