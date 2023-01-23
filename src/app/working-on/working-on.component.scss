@@ -1,7 +1,7 @@
 .working-on-form {
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
   color: var(--text-color);
 }
 
@@ -14,11 +14,15 @@
   align-items: center;
 }
 
+.working-on-input-wrapper {
+  flex: 1;
+  margin-right: 10px;
+}
+
 .working-on-input {
   font-weight: 600;
-  background: rgba(0, 0, 0, 0);
-  border: none;
-  outline: none;
+  font-size: 16px;
+  width: 100%;
 }
 
 .working-on-input::placeholder {

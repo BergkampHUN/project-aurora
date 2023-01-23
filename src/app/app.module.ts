@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { TimerComponent } from './timer/timer.component';
 import { WorkingOnComponent } from './working-on/working-on.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -24,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     ButtonModule,
     DropdownModule,
+    InputTextModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
