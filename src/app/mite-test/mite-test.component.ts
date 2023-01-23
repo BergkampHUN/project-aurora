@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  ProjectResponseObj,
+  Project,
   ServiceResponseObj,
   TimeEntry,
   TimeEntryResponseObj,
@@ -15,7 +15,7 @@ import { MiteService } from '../services/mite.service';
   styleUrls: ['./mite-test.component.scss'],
 })
 export class MiteTestComponent {
-  public projects: ProjectResponseObj[] = [];
+  public projects: Project[] = [];
   public services: ServiceResponseObj[] = [];
   public tracker!: TrackerResponse;
   public timeEntries: TimeEntryResponseObj[] = [];

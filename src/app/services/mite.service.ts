@@ -1,9 +1,10 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {
   CreateTimeEntry,
   EditTimeEntry,
+  Project,
   ProjectResponseObj,
   ServiceResponseObj,
   TimeEntryResponseObj,
@@ -26,17 +27,20 @@ export class MiteService {
     }
 
     // TODO: make this as a setHeaders function / later to an http interceptor
-    this.headers = new HttpHeaders()
-      .set('content-type', 'application/json')
-      .set('Access-Control-Allow-Origin', '*')
-      .set('X-MiteApiKey', this.apiKey);
+    this.headers = new HttpHeaders().set('X-MiteApiKey', this.apiKey);
   }
 
-  public getProjects(): Observable<ProjectResponseObj[]> {
+  public getProjects(): Observable<Project[]> {
     // TODO: mapping the responses later to remove the object keys
-    return this.http.get<ProjectResponseObj[]>(`${this.baseUrl}/projects.json`, {
-      headers: this.headers,
-    });
+    return this.http
+      .get<ProjectResponseObj[]>(`${this.baseUrl}/projects.json`, {
+        headers: this.headers,
+      })
+      .pipe(
+        map((projectsArray) => {
+          return projectsArray.map((projectObj) => projectObj.project);
+        })
+      );
   }
 
   public getServices(): Observable<ServiceResponseObj[]> {
