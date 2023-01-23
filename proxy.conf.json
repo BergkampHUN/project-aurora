@@ -1,0 +1,10 @@
+{
+  "/mite": {
+    "target": "https://projectaurora.mite.yo.lk",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/mite": ""
+    }
+  }
+}

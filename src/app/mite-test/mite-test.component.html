@@ -1,0 +1,69 @@
+<p>Myself:</p>
+<ul>
+  <li>{{ myself | json }}</li>
+</ul>
+
+<p>Projects:</p>
+<ul>
+  <li *ngFor="let project of projects">{{ project | json }}</li>
+</ul>
+
+<p>Services:</p>
+<ul>
+  <li *ngFor="let service of services">{{ service.service | json }}</li>
+</ul>
+
+<p>Tracker:</p>
+<ul>
+  <li>{{ tracker | json }}</li>
+</ul>
+
+<p>Start tracker for id 113157544:</p>
+<ul>
+  <li>
+    <button (click)="startTracker(113157544, timeEntry.time_entry)">Start tracker</button>
+  </li>
+</ul>
+
+<p>Stop running tracker:</p>
+<ul>
+  <li>
+    <button (click)="stopTracker(tracker)">Stop tracker</button>
+  </li>
+</ul>
+
+<p>Time Entries:</p>
+<ul>
+  <li *ngFor="let timeEntry of timeEntries">
+    {{ timeEntry.time_entry | json }}
+    <button (click)="deleteTimeEntry(timeEntry.time_entry.id)">Delete</button>
+  </li>
+</ul>
+
+<p>Time Entries for 2022-01-20:</p>
+<ul>
+  <li *ngFor="let timeEntry of timeEntries2">
+    {{ timeEntry.time_entry | json }}
+    <button (click)="deleteTimeEntry(timeEntry.time_entry.id)">Delete</button>
+  </li>
+</ul>
+
+<p>Time entry with id 113157544:</p>
+<ul>
+  <li>{{ timeEntry | json }}</li>
+</ul>
+
+<p>Create Time Entry:</p>
+<ul>
+  <li>
+    <button (click)="createTimeEntry()">Create Time Entry</button>
+  </li>
+</ul>
+
+<p>Edit Time Entry 113157544:</p>
+<ul>
+  <li>
+    <textarea name="note" id="note" cols="30" rows="10" [(ngModel)]="note"></textarea>
+    <button (click)="editTimeEntry()">Edit Time Entry</button>
+  </li>
+</ul>
