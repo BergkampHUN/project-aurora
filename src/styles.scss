@@ -59,11 +59,11 @@ body {
   .p-dropdown-trigger {
     color: var(--primary);
   }
-}
 
-.p-dropdown .p-dropdown-label {
-  color: var(--text-color);
-  &.p-placeholder {
+  .p-dropdown-label {
     color: var(--text-color);
+    &.p-placeholder {
+      color: var(--text-color);
+    }
   }
 }
