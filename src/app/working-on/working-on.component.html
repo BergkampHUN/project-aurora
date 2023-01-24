@@ -7,6 +7,7 @@
       placeholder="Project Name"
       [filter]="true"
       filterBy="name"
+      scrollHeight="400px"
       [showClear]="true">
       <ng-template let-item pTemplate="selectedItem">
         <span>
@@ -48,13 +49,53 @@
         </div>
       </ng-template>
     </p-dropdown>
-    <span>/</span>
+    <span class="working-on-slash">/</span>
     <p-dropdown
       [options]="services"
       formControlName="service"
       optionLabel="name"
-      placeholder="Service"></p-dropdown>
-    <span>/</span>
+      placeholder="Service"
+      filterBy="name"
+      scrollHeight="400px"
+      [showClear]="true">
+      <ng-template let-service pTemplate="selectedItem">
+        <div class="country-item working-on-service">
+          <img
+            src="assets/imgs/{{
+              service.name.trim().split(' ').shift() === 'VIE'
+                ? 'austria'
+                : '' || service.name.trim().split(' ').shift() === 'PRN'
+                ? 'kosovo'
+                : '' || service.name.trim().split(' ').shift() === 'HRV'
+                ? 'croatia'
+                : ''
+            }}.svg"
+            alt="Country flag" />
+          <span>
+            {{ service.name.trim().split(' ').slice(1).join(' ') }}
+          </span>
+        </div>
+      </ng-template>
+      <ng-template let-services pTemplate="item">
+        <div class="country-item working-on-service">
+          <img
+            src="assets/imgs/{{
+              services.name.trim().split(' ').shift() === 'VIE'
+                ? 'austria'
+                : '' || services.name.trim().split(' ').shift() === 'PRN'
+                ? 'kosovo'
+                : '' || services.name.trim().split(' ').shift() === 'HRV'
+                ? 'croatia'
+                : ''
+            }}.svg"
+            alt="Country flag" />
+          <span>
+            {{ services.name.trim().split(' ').slice(1).join(' ') }}
+          </span>
+        </div>
+      </ng-template>
+    </p-dropdown>
+    <span class="working-on-slash">/</span>
     <div class="working-on-input-wrapper">
       <input
         pInputText
