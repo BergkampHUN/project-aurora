@@ -5,14 +5,55 @@
       formControlName="projectName"
       optionLabel="name"
       placeholder="Project Name"
-    ></p-dropdown>
+      [filter]="true"
+      filterBy="name"
+      [showClear]="true">
+      <ng-template let-item pTemplate="selectedItem">
+        <span>
+          {{
+            item.name
+              .substring(item.name.indexOf('/') + 1)
+              .split(' ')
+              .reverse()
+              .slice(1)
+              .reverse()
+              .join(' ')
+          }}
+        </span>
+        <span>
+          <span class="working-on-form-project-code">
+            {{ item.name.split(' ').pop() }}
+          </span>
+        </span>
+      </ng-template>
+      <ng-template let-project pTemplate="item">
+        <div>
+          <div class="text-bold working-on-form-project-name">
+            {{ project.name.split(' ')[0] }}
+          </div>
+          <span>
+            {{
+              project.name
+                .substring(project.name.indexOf('/') + 1)
+                .split(' ')
+                .reverse()
+                .slice(1)
+                .reverse()
+                .join(' ')
+            }}
+          </span>
+          <span class="working-on-form-project-code">
+            {{ project.name.split(' ').pop() }}
+          </span>
+        </div>
+      </ng-template>
+    </p-dropdown>
     <span>/</span>
     <p-dropdown
       [options]="services"
       formControlName="service"
       optionLabel="name"
-      placeholder="Service"
-    ></p-dropdown>
+      placeholder="Service"></p-dropdown>
     <span>/</span>
     <div class="working-on-input-wrapper">
       <input
@@ -20,8 +61,7 @@
         type="text"
         placeholder="What are you working on?"
         class="working-on-input no-border"
-        formControlName="workingOnInput"
-      />
+        formControlName="workingOnInput" />
     </div>
   </form>
   <div class="working-on-right-side">
@@ -31,7 +71,6 @@
       pRipple
       type="button"
       icon="pi pi-stop-circle"
-      class="p-button-rounded p-button-secondary p-button-text"
-    ></button>
+      class="p-button-rounded p-button-secondary p-button-text"></button>
   </div>
 </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MiteService } from '../services/mite.service';
 import { Project, Service } from '../interfaces/mite';
+import { DropdownFilterOptions } from 'primeng/dropdown';
 
 @Component({
   selector: 'app-working-on',
@@ -12,8 +13,9 @@ export class WorkingOnComponent implements OnInit {
   workingOnForm!: FormGroup;
 
   public projects: Project[] = [];
-
   public services: Service[] = [];
+
+  filterValue = '';
 
   constructor(private miteService: MiteService) {}
 
@@ -31,5 +33,9 @@ export class WorkingOnComponent implements OnInit {
     this.miteService.getServices().subscribe((res) => {
       this.services = res;
     });
+  }
+  myResetFunction(options: DropdownFilterOptions) {
+    options.reset?.();
+    this.filterValue = '';
   }
 }
