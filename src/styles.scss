@@ -35,6 +35,11 @@ body {
   align-items: center;
 }
 
+.country-flag {
+  height: 15px;
+  margin-top: 3px;
+}
+
 // ************ Helpes Classes ************
 .flex {
   display: flex;
@@ -64,6 +69,7 @@ body {
   margin: 0 10px 0 10px;
   color: var(--text-color);
   font-weight: 700;
+  padding: 0 15px 0 0;
 
   .p-dropdown-trigger {
     color: var(--primary);
@@ -74,10 +80,6 @@ body {
     &.p-placeholder {
       color: var(--text-color);
     }
-  }
-
-  .p-dropdown-items-wrapper {
-    padding: 0 30px 0 0;
   }
 }
 

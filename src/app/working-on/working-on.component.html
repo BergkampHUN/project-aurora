@@ -11,40 +11,24 @@
       [showClear]="true">
       <ng-template let-item pTemplate="selectedItem">
         <span>
-          {{
-            item.name
-              .substring(item.name.indexOf('/') + 1)
-              .split(' ')
-              .reverse()
-              .slice(1)
-              .reverse()
-              .join(' ')
-          }}
+          {{ item.name | projectName }}
         </span>
         <span>
           <span class="working-on-form-project-code">
-            {{ item.name.split(' ').pop() }}
+            {{ item.name | projectCode }}
           </span>
         </span>
       </ng-template>
       <ng-template let-project pTemplate="item">
         <div>
           <div class="text-bold working-on-form-project-name">
-            {{ project.name.split(' ')[0] }}
+            {{ project.name | companyName }}
           </div>
           <span>
-            {{
-              project.name
-                .substring(project.name.indexOf('/') + 1)
-                .split(' ')
-                .reverse()
-                .slice(1)
-                .reverse()
-                .join(' ')
-            }}
+            {{ project.name | projectName }}
           </span>
           <span class="working-on-form-project-code">
-            {{ project.name.split(' ').pop() }}
+            {{ project.name | projectCode }}
           </span>
         </div>
       </ng-template>
@@ -59,38 +43,24 @@
       scrollHeight="400px"
       [showClear]="true">
       <ng-template let-service pTemplate="selectedItem">
-        <div class="country-item working-on-service">
+        <div class="country-item working-on-service align-items-center">
           <img
-            src="assets/imgs/{{
-              service.name.trim().split(' ').shift() === 'VIE'
-                ? 'austria'
-                : '' || service.name.trim().split(' ').shift() === 'PRN'
-                ? 'kosovo'
-                : '' || service.name.trim().split(' ').shift() === 'HRV'
-                ? 'croatia'
-                : ''
-            }}.svg"
-            alt="Country flag" />
+            src="assets/imgs/{{ service.name | conditionalCountryFlag }}.png"
+            alt="Country flag"
+            class="country-flag" />
           <span>
-            {{ service.name.trim().split(' ').slice(1).join(' ') }}
+            {{ service.name | serviceName }}
           </span>
         </div>
       </ng-template>
       <ng-template let-services pTemplate="item">
-        <div class="country-item working-on-service">
+        <div class="country-item working-on-service align-items-center">
           <img
-            src="assets/imgs/{{
-              services.name.trim().split(' ').shift() === 'VIE'
-                ? 'austria'
-                : '' || services.name.trim().split(' ').shift() === 'PRN'
-                ? 'kosovo'
-                : '' || services.name.trim().split(' ').shift() === 'HRV'
-                ? 'croatia'
-                : ''
-            }}.svg"
-            alt="Country flag" />
+            src="assets/imgs/{{ services.name | conditionalCountryFlag }}.png"
+            alt="Country flag"
+            class="country-flag" />
           <span>
-            {{ services.name.trim().split(' ').slice(1).join(' ') }}
+            {{ services.name | serviceName }}
           </span>
         </div>
       </ng-template>
