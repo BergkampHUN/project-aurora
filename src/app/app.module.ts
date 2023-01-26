@@ -20,6 +20,8 @@ import { CompanyNamePipe } from './pipes/company-name.pipe';
 import { ProjectCodePipe } from './pipes/project-code.pipe';
 import { ServiceNamePipe } from './pipes/service-name.pipe';
 import { ConditionalFlagPipe } from './pipes/conditional-country-flag.pipe';
+import { CardComponent } from './card/card.component';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { ConditionalFlagPipe } from './pipes/conditional-country-flag.pipe';
     ProjectCodePipe,
     ServiceNamePipe,
     ConditionalFlagPipe,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +47,7 @@ import { ConditionalFlagPipe } from './pipes/conditional-country-flag.pipe';
     InputTextModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ChartModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

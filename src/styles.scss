@@ -27,6 +27,8 @@ body {
   --surface-ground: #eff3f8;
 }
 
+$color-primary: #55c57a;
+
 .default-card {
   background-color: var(--surface-card);
   padding: 10px 28px;
@@ -40,9 +42,18 @@ body {
   margin-top: 3px;
 }
 
+.cards {
+  margin-top: 8px;
+  gap: 8px;
+}
+
 // ************ Helpes Classes ************
 .flex {
   display: flex;
+}
+
+.flex-grow {
+  flex: 1;
 }
 
 .justify-content-between {
@@ -53,8 +64,11 @@ body {
   align-items: center;
 }
 
-.time-bold {
+.chivo {
   font-family: 'Chivo Mono';
+}
+
+.time-bold {
   font-weight: 700;
 }
 
