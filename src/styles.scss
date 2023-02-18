@@ -13,6 +13,7 @@ body {
 :root {
   --text-color: #1e293b;
   --text-color-secondary: #64748b;
+  --text-color-tertiary: #b3b3b3;
   --primary: #3b82f6;
   --cyan-500: #06b6d4;
   --cyan-100: #c3edf5;
@@ -34,6 +35,11 @@ body {
   align-items: center;
 }
 
+.country-flag {
+  height: 15px;
+  margin-top: 3px;
+}
+
 // ************ Helpes Classes ************
 .flex {
   display: flex;
@@ -48,7 +54,7 @@ body {
 }
 
 .time-bold {
-  font-family: "Chivo Mono";
+  font-family: 'Chivo Mono';
   font-weight: 700;
 }
 
@@ -60,9 +66,10 @@ body {
 
 .p-dropdown {
   border: none;
-  margin: 0 15px 0 0;
+  margin: 0 10px 0 10px;
   color: var(--text-color);
   font-weight: 700;
+  padding: 0 15px 0 0;
 
   .p-dropdown-trigger {
     color: var(--primary);

@@ -15,6 +15,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProjectNameSelectedPipe } from './pipes/project-name.pipe';
+import { CompanyNamePipe } from './pipes/company-name.pipe';
+import { ProjectCodePipe } from './pipes/project-code.pipe';
+import { ServiceNamePipe } from './pipes/service-name.pipe';
+import { ConditionalFlagPipe } from './pipes/conditional-country-flag.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +28,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     TimerComponent,
     WorkingOnComponent,
+    ProjectNameSelectedPipe,
+    CompanyNamePipe,
+    ProjectCodePipe,
+    ServiceNamePipe,
+    ConditionalFlagPipe,
   ],
   imports: [
     BrowserModule,

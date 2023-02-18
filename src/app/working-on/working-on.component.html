@@ -5,23 +5,74 @@
       formControlName="projectName"
       optionLabel="name"
       placeholder="Project Name"
-    ></p-dropdown>
-    <span>/</span>
+      [filter]="true"
+      filterBy="name"
+      scrollHeight="400px"
+      [showClear]="true">
+      <ng-template let-item pTemplate="selectedItem">
+        <span>
+          {{ item.name | projectName }}
+        </span>
+        <span>
+          <span class="working-on-form-project-code">
+            {{ item.name | projectCode }}
+          </span>
+        </span>
+      </ng-template>
+      <ng-template let-project pTemplate="item">
+        <div>
+          <div class="text-bold working-on-form-project-name">
+            {{ project.name | companyName }}
+          </div>
+          <span>
+            {{ project.name | projectName }}
+          </span>
+          <span class="working-on-form-project-code">
+            {{ project.name | projectCode }}
+          </span>
+        </div>
+      </ng-template>
+    </p-dropdown>
+    <span class="working-on-slash">/</span>
     <p-dropdown
       [options]="services"
       formControlName="service"
       optionLabel="name"
       placeholder="Service"
-    ></p-dropdown>
-    <span>/</span>
+      filterBy="name"
+      scrollHeight="400px"
+      [showClear]="true">
+      <ng-template let-service pTemplate="selectedItem">
+        <div class="country-item working-on-service align-items-center">
+          <img
+            src="assets/imgs/{{ service.name | conditionalCountryFlag }}.png"
+            alt="Country flag"
+            class="country-flag" />
+          <span>
+            {{ service.name | serviceName }}
+          </span>
+        </div>
+      </ng-template>
+      <ng-template let-services pTemplate="item">
+        <div class="country-item working-on-service align-items-center">
+          <img
+            src="assets/imgs/{{ services.name | conditionalCountryFlag }}.png"
+            alt="Country flag"
+            class="country-flag" />
+          <span>
+            {{ services.name | serviceName }}
+          </span>
+        </div>
+      </ng-template>
+    </p-dropdown>
+    <span class="working-on-slash">/</span>
     <div class="working-on-input-wrapper">
       <input
         pInputText
         type="text"
         placeholder="What are you working on?"
         class="working-on-input no-border"
-        formControlName="workingOnInput"
-      />
+        formControlName="workingOnInput" />
     </div>
   </form>
   <div class="working-on-right-side">
@@ -31,7 +82,6 @@
       pRipple
       type="button"
       icon="pi pi-stop-circle"
-      class="p-button-rounded p-button-secondary p-button-text"
-    ></button>
+      class="p-button-rounded p-button-secondary p-button-text"></button>
   </div>
 </div>

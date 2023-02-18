@@ -5,13 +5,20 @@
   color: var(--text-color);
 }
 
-.working-on-form span {
-  margin-right: 10px;
+.working-on-form-project-name {
+  font-weight: 700;
+  margin-bottom: 5px;
 }
 
-.working-on-right-side {
+.working-on-form-project-code {
+  font-size: 13px;
+  color: var(--text-color-tertiary);
+  font-style: italic;
+}
+
+.working-on-service {
   display: flex;
-  align-items: center;
+  gap: 10px;
 }
 
 .working-on-input-wrapper {
@@ -27,4 +34,9 @@
 
 .working-on-input::placeholder {
   color: var(--text-color-secondary);
+}
+
+.working-on-right-side {
+  display: flex;
+  align-items: center;
 }
