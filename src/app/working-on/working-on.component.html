@@ -2,7 +2,7 @@
   <form [formGroup]="workingOnForm" class="working-on-form text-semi-bold">
     <!-- PROJECT NAME -->
     <p-cascadeSelect
-      formControlName="projectName"
+      formControlName="project"
       [options]="groupedProjects"
       optionLabel="name"
       optionGroupLabel="name"
@@ -74,16 +74,17 @@
         type="text"
         placeholder="What are you working on?"
         class="working-on-input no-border"
-        formControlName="workingOnInput" />
+        formControlName="note" />
     </div>
   </form>
   <div class="working-on-right-side">
-    <app-timer></app-timer>
+    <app-timer type="mite"></app-timer>
     <button
       pButton
       pRipple
       type="button"
-      icon="pi pi-stop-circle"
-      class="p-button-rounded p-button-secondary p-button-text"></button>
+      icon="pi {{ runningTimeEntry ? 'pi-stop-circle' : 'pi-play' }}"
+      (click)="toggleTimeEntry()"
+      class="p-button-rounded p-button-secondary p-button-text p-button-sm"></button>
   </div>
 </div>
