@@ -20,6 +20,7 @@ import { CompanyNamePipe } from './pipes/company-name.pipe';
 import { ProjectCodePipe } from './pipes/project-code.pipe';
 import { ServiceNamePipe } from './pipes/service-name.pipe';
 import { ConditionalFlagPipe } from './pipes/conditional-country-flag.pipe';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ConditionalFlagPipe } from './pipes/conditional-country-flag.pipe';
     InputTextModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    CascadeSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

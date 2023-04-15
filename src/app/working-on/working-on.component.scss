@@ -3,17 +3,25 @@
   display: flex;
   align-items: center;
   color: var(--text-color);
-}
 
-.working-on-form-project-name {
-  font-weight: 700;
-  margin-bottom: 5px;
-}
+  &-project-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
 
-.working-on-form-project-code {
-  font-size: 13px;
-  color: var(--text-color-tertiary);
-  font-style: italic;
+  &-project-name {
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  &-project-code {
+    font-size: 13px;
+    color: var(--text-color-tertiary);
+    font-style: italic;
+    margin-left: 5px;
+  }
 }
 
 .working-on-service {
