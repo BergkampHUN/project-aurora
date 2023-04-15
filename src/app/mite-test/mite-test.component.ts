@@ -26,24 +26,24 @@ export class MiteTestComponent {
 
   constructor(private miteService: MiteService) {
     // TODO: add error handling
-    this.miteService.getProjects().subscribe((res) => {
-      this.projects = res;
-    });
-    this.miteService.getServices().subscribe((res) => {
-      this.services = res;
-    });
+    // this.miteService.getProjects().subscribe((res) => {
+    //   this.projects = res;
+    // });
+    // this.miteService.getServices().subscribe((res) => {
+    //   this.services = res;
+    // });
     this.miteService.getTracker().subscribe((res) => {
       this.tracker = res;
     });
-    this.miteService.getTimeEntries().subscribe((res) => {
-      this.timeEntries = res;
-    });
-    this.miteService.getTimeEntries('2023-01-20').subscribe((res) => {
-      this.timeEntries2 = res;
-    });
-    this.miteService.getTimeEntry(113157544).subscribe((res) => {
-      this.timeEntry = res;
-    });
+    // this.miteService.getTimeEntries().subscribe((res) => {
+    //   this.timeEntries = res;
+    // });
+    // this.miteService.getTimeEntries('2023-01-20').subscribe((res) => {
+    //   this.timeEntries2 = res;
+    // });
+    // this.miteService.getTimeEntry(113157544).subscribe((res) => {
+    //   this.timeEntry = res;
+    // });
     this.miteService.getMyself().subscribe((res) => {
       this.myself = res.user;
     });
@@ -101,7 +101,8 @@ export class MiteTestComponent {
   }
 
   stopTracker(tracker: TrackerResponse) {
-    this.miteService.stopTracker(tracker).subscribe((res) => {
+    if (!tracker.tracker.tracking_time_entry) return;
+    this.miteService.stopTracker(tracker.tracker.tracking_time_entry?.id).subscribe((res) => {
       console.log(res);
     });
   }

@@ -4,6 +4,12 @@
   width: 100%;
   max-width: 1504px;
   color: var(--text-color);
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 14px;
+}
+
+.p-button.p-button-icon-only.p-button-rounded.p-button-sm {
+  padding: 0.25rem;
+  width: 2rem;
+  height: 2rem;
 }

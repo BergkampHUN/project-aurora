@@ -1,6 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import {
   CreateTimeEntry,
   EditTimeEntry,
@@ -8,7 +8,9 @@ import {
   ProjectResponseObj,
   Service,
   ServiceResponseObj,
+  TimeEntry,
   TimeEntryResponseObj,
+  TrackerObj,
   TrackerResponse,
   UserResponseObj,
 } from '../interfaces/mite';
@@ -21,6 +23,8 @@ export class MiteService {
   // private domain: string = 'https://projectaurora.mite.yo.lk'
   private headers: HttpHeaders;
   private baseUrl: string = '';
+  private pollInterval: number = 10000;
+  private _currentTracker: BehaviorSubject<TrackerObj> = new BehaviorSubject({});
 
   constructor(private http: HttpClient) {
     if (isDevMode()) {
@@ -29,6 +33,8 @@ export class MiteService {
 
     // TODO: make this as a setHeaders function / later to an http interceptor
     this.headers = new HttpHeaders().set('X-MiteApiKey', this.apiKey);
+
+    this.updateTracker();
   }
 
   public getProjects(): Observable<Project[]> {
@@ -64,16 +70,19 @@ export class MiteService {
   }
 
   public startTracker(id: number, tracker: TrackerResponse): Observable<TrackerResponse> {
-    return this.http.patch<TrackerResponse>(`${this.baseUrl}/tracker/${id}.json`, tracker, {
-      headers: this.headers,
-    });
+    return this.http
+      .patch<TrackerResponse>(`${this.baseUrl}/tracker/${id}.json`, tracker, {
+        headers: this.headers,
+      })
+      .pipe(tap((res) => this._currentTracker.next(res.tracker)));
   }
 
-  public stopTracker(tracker: TrackerResponse): Observable<TrackerResponse> {
-    return this.http.delete<TrackerResponse>(
-      `${this.baseUrl}/tracker/${tracker.tracker.tracking_time_entry?.id}.json`,
-      { headers: this.headers }
-    );
+  public stopTracker(trackerId: number): Observable<TrackerResponse> {
+    return this.http
+      .delete<TrackerResponse>(`${this.baseUrl}/tracker/${trackerId}.json`, {
+        headers: this.headers,
+      })
+      .pipe(tap((res) => this._currentTracker.next({})));
   }
 
   public getTimeEntries(date?: string): Observable<TimeEntryResponseObj[]> {
@@ -115,5 +124,16 @@ export class MiteService {
 
   public getMyself(): Observable<UserResponseObj> {
     return this.http.get<UserResponseObj>(`${this.baseUrl}/myself.json`, { headers: this.headers });
+  }
+
+  private updateTracker(): void {
+    this.getTracker().subscribe((tracker) => {
+      this._currentTracker.next(tracker.tracker);
+      setTimeout(() => this.updateTracker(), this.pollInterval);
+    });
+  }
+
+  get currentTracker$(): Observable<TrackerObj> {
+    return this._currentTracker.asObservable();
   }
 }

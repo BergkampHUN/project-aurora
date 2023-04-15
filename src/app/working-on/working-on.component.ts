@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MiteService } from '../services/mite.service';
-import { Project, Service } from '../interfaces/mite';
+import {
+  GrouppedProject,
+  Project,
+  Service,
+  TimeEntry,
+  TimeEntryResponseObj,
+  TrackingTimeEntryWithId,
+} from '../interfaces/mite';
 import { DropdownFilterOptions } from 'primeng/dropdown';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-working-on',
@@ -14,18 +22,39 @@ export class WorkingOnComponent implements OnInit {
 
   public projects: Project[] = [];
   public services: Service[] = [];
-  public groupedProjects: any[] = [];
+  public groupedProjects: GrouppedProject[] = [];
   public groupedServices: any[] = [];
+
+  public currentTracker$: Subscription;
+  public runningTimeEntry: TimeEntry | null = null;
 
   filterValue = '';
 
-  constructor(private miteService: MiteService) {}
+  constructor(private miteService: MiteService) {
+    this.currentTracker$ = this.miteService.currentTracker$.subscribe((tracker) => {
+      if (tracker && tracker.tracking_time_entry) {
+        if (!this.runningTimeEntry || this.runningTimeEntry.id !== tracker.tracking_time_entry.id) {
+          this.miteService
+            .getTimeEntry(tracker.tracking_time_entry.id)
+            .subscribe((res: TimeEntryResponseObj) => {
+              this.runningTimeEntry = res.time_entry;
+              this.setTimeEntryFields(res.time_entry);
+            });
+        }
+      } else {
+        if (this.runningTimeEntry) {
+          this.workingOnForm.get('note')?.setValue('');
+          this.runningTimeEntry = null;
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.workingOnForm = new FormGroup({
-      projectName: new FormControl(null),
+      project: new FormControl(null, [Validators.required]),
       service: new FormControl(null),
-      workingOnInput: new FormControl(null),
+      note: new FormControl(null),
     });
 
     this.miteService.getProjects().subscribe((res) => {
@@ -39,9 +68,46 @@ export class WorkingOnComponent implements OnInit {
       this.groupedServices = this.groupServices(res);
     });
   }
-  myResetFunction(options: DropdownFilterOptions) {
-    options.reset?.();
-    this.filterValue = '';
+
+  toggleTimeEntry(): void {
+    if (this.runningTimeEntry) {
+      this.miteService.stopTracker(this.runningTimeEntry.id).subscribe(() => {
+        this.workingOnForm.get('note')?.setValue('');
+      });
+    } else {
+      const payload = this.workingOnForm.getRawValue();
+      if (payload.project && payload.service) {
+        const project_id = payload.project.project.id;
+        const service_id = payload.service.service.id;
+        const note = payload.note;
+        if (project_id && service_id) {
+          this.miteService
+            .createTimeEntry({
+              minutes: 0,
+              note,
+              project_id: project_id,
+              service_id: service_id,
+            })
+            .subscribe((res) => {
+              console.log(res);
+              const now = new Date();
+              this.miteService
+                .startTracker(res.time_entry.id, {
+                  tracker: {
+                    tracking_time_entry: {
+                      id: res.time_entry.id,
+                      minutes: res.time_entry.minutes,
+                      since: now.toISOString(),
+                    },
+                  },
+                })
+                .subscribe((res) => {
+                  console.log(res);
+                });
+            });
+        }
+      }
+    }
   }
 
   private groupProjectsByCustomer(projects: Project[]): any[] {
@@ -52,7 +118,11 @@ export class WorkingOnComponent implements OnInit {
     return grouppedArray;
   }
 
-  private placeProjectInCustomerGroup(name: string, arrayPart: any[], project: Project) {
+  private placeProjectInCustomerGroup(
+    name: string,
+    arrayPart: GrouppedProject[],
+    project: Project
+  ) {
     const splittedName = name.split(' / ');
     let customerName = splittedName[0];
     const rest = splittedName.slice(1).join(' / ');
@@ -60,16 +130,21 @@ export class WorkingOnComponent implements OnInit {
     const foundIndex = arrayPart.findIndex((item) => item.name === customerName);
     if (foundIndex !== -1) {
       const foundItem = arrayPart[foundIndex];
-      this.placeProjectInCustomerGroup(rest, foundItem.items, project);
+      if (foundItem) {
+        this.placeProjectInCustomerGroup(rest, foundItem.items || [], project);
+      }
     } else {
       if (splittedName.length > 1) {
         arrayPart.push({
           name: customerName,
-          project,
           items: [],
         });
 
-        this.placeProjectInCustomerGroup(rest, arrayPart[arrayPart.length - 1].items, project);
+        this.placeProjectInCustomerGroup(
+          rest,
+          arrayPart[arrayPart.length - 1].items || [],
+          project
+        );
       } else {
         const projectNameAndCode = this.splitProjectNameAndCode(customerName);
         const itemObj = {
@@ -140,5 +215,33 @@ export class WorkingOnComponent implements OnInit {
     } else {
       return [projectName];
     }
+  }
+
+  private setTimeEntryFields(entry: TimeEntry): void {
+    // GET PROJECT
+    const foundProject = this.projects.find((project) => project.id === entry.project_id);
+    let grouppedProject = {};
+    if (foundProject) {
+      const names = foundProject.name.split(' / ');
+      const code = this.splitProjectNameAndCode(names[names.length - 1]);
+
+      grouppedProject = {
+        name: code[0],
+        code: code[1],
+        project: foundProject,
+      };
+    }
+
+    // GET SERVICE
+    const foundService = this.services.find((service) => service.id === entry.service_id);
+
+    this.workingOnForm.patchValue({
+      project: grouppedProject,
+      service: {
+        name: foundService?.name.split(' ')[1],
+        service: foundService,
+      },
+      note: entry.note,
+    });
   }
 }
