@@ -1,6 +1,6 @@
 {
   "/mite": {
-    "target": "https://projectaurora.mite.yo.lk",
+    "target": "https://schmidp.mite.de",
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {

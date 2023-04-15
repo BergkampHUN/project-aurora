@@ -1,5 +1,5 @@
 export interface ProjectResponseObj {
-  project: Project
+  project: Project;
 }
 export interface Project {
   budget: number;
@@ -18,5 +18,12 @@ export interface Project {
 }
 
 export enum BudgetTypeEnum {
-  MINUTES = "minutes"
+  MINUTES = 'minutes',
+}
+
+export interface GrouppedProject {
+  name: string;
+  items?: GrouppedProject[];
+  code?: string;
+  project?: Project;
 }

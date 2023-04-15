@@ -5,6 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ProjectNameSelectedPipe implements PipeTransform {
   transform(value: string) {
+    if (!value) return null;
+
     return value
       .substring(value.indexOf('/') + 1)
       .split(' ')

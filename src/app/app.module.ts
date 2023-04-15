@@ -22,6 +22,7 @@ import { ServiceNamePipe } from './pipes/service-name.pipe';
 import { ConditionalFlagPipe } from './pipes/conditional-country-flag.pipe';
 import { CardComponent } from './card/card.component';
 import { ChartModule } from 'primeng/chart';
+import { CascadeSelectModule } from 'primeng/cascadeselect';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ChartModule } from 'primeng/chart';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ChartModule,
+    CascadeSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

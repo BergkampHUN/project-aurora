@@ -1,87 +1,90 @@
 <div class="flex justify-content-between align-items-center default-card">
   <form [formGroup]="workingOnForm" class="working-on-form text-semi-bold">
-    <p-dropdown
-      [options]="projects"
-      formControlName="projectName"
+    <!-- PROJECT NAME -->
+    <p-cascadeSelect
+      formControlName="project"
+      [options]="groupedProjects"
       optionLabel="name"
+      optionGroupLabel="name"
       placeholder="Project Name"
-      [filter]="true"
-      filterBy="name"
-      scrollHeight="400px"
-      [showClear]="true">
-      <ng-template let-item pTemplate="selectedItem">
-        <span>
-          {{ item.name | projectName }}
-        </span>
-        <span>
-          <span class="working-on-form-project-code">
-            {{ item.name | projectCode }}
-          </span>
-        </span>
-      </ng-template>
-      <ng-template let-project pTemplate="item">
-        <div>
-          <div class="text-bold working-on-form-project-name">
-            {{ project.name | companyName }}
-          </div>
+      [optionGroupChildren]="['items', 'items']"
+      [style]="{ minWidth: '14rem' }"
+      styleClass="project-selector">
+      <ng-template let-item pTemplate="value">
+        <ng-container *ngIf="item; else placeholder">
           <span>
-            {{ project.name | projectName }}
+            {{ item.name }}
           </span>
-          <span class="working-on-form-project-code">
-            {{ project.name | projectCode }}
+          <span>
+            <span class="working-on-form-project-code">
+              {{ item.code }}
+            </span>
+          </span>
+        </ng-container>
+        <ng-template #placeholder>
+          <span class="placeholder">Project Name</span>
+        </ng-template>
+      </ng-template>
+
+      <ng-template pTemplate="option" let-option>
+        <div class="working-on-form-project-item align-items-center">
+          <span>
+            {{ option.name }}
+          </span>
+          <span>
+            <span class="working-on-form-project-code">
+              {{ option.code }}
+            </span>
           </span>
         </div>
       </ng-template>
-    </p-dropdown>
+    </p-cascadeSelect>
+
     <span class="working-on-slash">/</span>
-    <p-dropdown
-      [options]="services"
+
+    <!-- SERVICE NAME -->
+    <p-cascadeSelect
       formControlName="service"
+      [options]="groupedServices"
       optionLabel="name"
+      optionGroupLabel="name"
       placeholder="Service"
-      filterBy="name"
-      scrollHeight="400px"
-      [showClear]="true">
-      <ng-template let-service pTemplate="selectedItem">
+      [optionGroupChildren]="['items']"
+      [style]="{ minWidth: '14rem' }">
+      <ng-template pTemplate="option" let-option>
         <div class="country-item working-on-service align-items-center">
           <img
-            src="assets/imgs/{{ service.name | conditionalCountryFlag }}.png"
-            alt="Country flag"
+            *ngIf="option.country"
+            src="assets/imgs/{{ option.country }}.png"
+            [alt]="'Country flag ' + option.country"
             class="country-flag" />
           <span>
-            {{ service.name | serviceName }}
+            {{ option.label || option.name }}
           </span>
         </div>
       </ng-template>
-      <ng-template let-services pTemplate="item">
-        <div class="country-item working-on-service align-items-center">
-          <img
-            src="assets/imgs/{{ services.name | conditionalCountryFlag }}.png"
-            alt="Country flag"
-            class="country-flag" />
-          <span>
-            {{ services.name | serviceName }}
-          </span>
-        </div>
-      </ng-template>
-    </p-dropdown>
+    </p-cascadeSelect>
+
     <span class="working-on-slash">/</span>
+
+    <!-- NOTE -->
     <div class="working-on-input-wrapper">
       <input
         pInputText
         type="text"
         placeholder="What are you working on?"
         class="working-on-input no-border"
-        formControlName="workingOnInput" />
+        formControlName="note" />
     </div>
   </form>
   <div class="working-on-right-side">
-    <app-timer></app-timer>
+    <app-timer type="mite"></app-timer>
     <button
       pButton
       pRipple
       type="button"
-      icon="pi pi-stop-circle"
-      class="p-button-rounded p-button-secondary p-button-text"></button>
+      icon="pi {{ runningTimeEntry ? 'pi-stop-circle' : 'pi-play' }}"
+      (click)="toggleTimeEntry()"
+      class="p-button-rounded p-button-secondary p-button-text p-button-sm"></button>
   </div>
 </div>
