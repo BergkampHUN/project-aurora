@@ -17,7 +17,7 @@ import {
   providedIn: 'root',
 })
 export class MiteService {
-  private apiKey: string = '493e5543c9fb5356';
+  private apiKey: string = '1d2c5ae826d391e2';
   // private domain: string = 'https://projectaurora.mite.yo.lk'
   private headers: HttpHeaders;
   private baseUrl: string = '';

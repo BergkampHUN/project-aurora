@@ -37,7 +37,6 @@ body {
 
 .country-flag {
   height: 15px;
-  margin-top: 3px;
 }
 
 // ************ Helpes Classes ************
@@ -95,5 +94,48 @@ body {
         border: none;
       }
     }
+  }
+}
+
+.p-cascadeselect {
+  border: none;
+  margin: 0 10px 0 10px;
+  color: var(--text-color);
+  font-weight: 700;
+  padding: 0 0 0 0;
+
+  .p-cascadeselect-trigger {
+    color: var(--primary);
+  }
+
+  .p-cascadeselect-label {
+    color: var(--text-color);
+    &.p-placeholder {
+      color: var(--text-color);
+    }
+  }
+}
+
+.p-inputtext {
+  &.no-border {
+    background: transparent;
+    border: none;
+    outline: none;
+
+    &:enabled {
+      &:focus {
+        box-shadow: none;
+        border: none;
+      }
+    }
+  }
+}
+
+.project-selector {
+  .p-cascadeselect-label {
+    padding-right: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 }
