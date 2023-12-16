@@ -22,11 +22,13 @@ export class WorkingOnComponent implements OnInit {
 
   public projects: Project[] = [];
   public services: Service[] = [];
-  public groupedProjects: GrouppedProject[] = [];
+  public groupedProjects: any[] = [];
   public groupedServices: any[] = [];
 
   public currentTracker$: Subscription;
   public runningTimeEntry: TimeEntry | null = null;
+  public projectsLoaded: boolean = false;
+  public servicesLoaded: boolean = false;
 
   filterValue = '';
 
@@ -60,10 +62,12 @@ export class WorkingOnComponent implements OnInit {
     this.miteService.getProjects().subscribe((res) => {
       this.projects = res;
       this.groupedProjects = this.groupProjectsByCustomer(res);
+      this.projectsLoaded = true;
       console.log(this.groupedProjects);
     });
 
     this.miteService.getServices().subscribe((res) => {
+      this.servicesLoaded = true;
       this.services = res;
       this.groupedServices = this.groupServices(res);
     });

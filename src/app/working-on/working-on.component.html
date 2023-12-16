@@ -2,6 +2,7 @@
   <form [formGroup]="workingOnForm" class="working-on-form text-semi-bold">
     <!-- PROJECT NAME -->
     <p-cascadeSelect
+      *ngIf="projectsLoaded"
       formControlName="project"
       [options]="groupedProjects"
       optionLabel="name"
@@ -44,6 +45,7 @@
 
     <!-- SERVICE NAME -->
     <p-cascadeSelect
+      *ngIf="servicesLoaded"
       formControlName="service"
       [options]="groupedServices"
       optionLabel="name"
