@@ -4,6 +4,7 @@ import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import {
   CreateTimeEntry,
   EditTimeEntry,
+  GrouppedTimeEntries,
   Project,
   ProjectResponseObj,
   Service,
@@ -135,5 +136,64 @@ export class MiteService {
 
   get currentTracker$(): Observable<TrackerObj> {
     return this._currentTracker.asObservable();
+  }
+
+  public groupTimeEntries(timeEntries: TimeEntryResponseObj[]): GrouppedTimeEntries[] {
+    const groupedTimeEntries: GrouppedTimeEntries[] = [];
+    for (const timeEntry of timeEntries) {
+      this.placeTimeEntryInProjectGroup(timeEntry.time_entry, groupedTimeEntries);
+    }
+    return groupedTimeEntries;
+  }
+
+  private placeTimeEntryInProjectGroup(
+    timeEntry: TimeEntry,
+    arrayPart: GrouppedTimeEntries[],
+    serviceName?: string
+  ): void {
+    const nameParts: string[] = timeEntry.project_name.split('/');
+    const firstPart: string = serviceName || nameParts[0].trim();
+    let groupIndex: number = arrayPart.findIndex(
+      (groupedTimeEntry) => groupedTimeEntry.name === firstPart
+    );
+
+    if (groupIndex === -1) {
+      arrayPart.push({ name: firstPart, items: [], minutes: 0 });
+      groupIndex = arrayPart.length - 1;
+    }
+
+    if (nameParts.length > 1) {
+      const secondPart: string = nameParts[1].trim();
+      const reducedTimeneEntry: TimeEntry = {
+        ...timeEntry,
+        project_name: secondPart,
+      };
+
+      if (arrayPart[groupIndex].items !== undefined) {
+        arrayPart[groupIndex].minutes += timeEntry.minutes;
+        this.placeTimeEntryInProjectGroup(
+          reducedTimeneEntry,
+          arrayPart[groupIndex].items as GrouppedTimeEntries[]
+        );
+      }
+    } else {
+      if (!serviceName) {
+        if (arrayPart[groupIndex].items !== undefined) {
+          arrayPart[groupIndex].minutes += timeEntry.minutes;
+          this.placeTimeEntryInProjectGroup(
+            timeEntry,
+            arrayPart[groupIndex].items as GrouppedTimeEntries[],
+            timeEntry.service_name
+          );
+        }
+      } else {
+        arrayPart[groupIndex].minutes += timeEntry.minutes;
+        arrayPart[groupIndex].items!.push({
+          name: serviceName ? timeEntry.project_name : firstPart,
+          entry: timeEntry,
+          minutes: timeEntry.minutes,
+        });
+      }
+    }
   }
 }

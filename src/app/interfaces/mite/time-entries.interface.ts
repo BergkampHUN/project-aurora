@@ -1,7 +1,7 @@
 import { TrackingTimeEntry } from './tracker.interface';
 
 export interface TimeEntryResponseObj {
-  time_entry: TimeEntry
+  time_entry: TimeEntry;
 }
 
 export interface TimeEntry {
@@ -23,7 +23,7 @@ export interface TimeEntry {
   service_name: string;
   created_at: string;
   updated_at: string;
-  tracking?: TrackingTimeEntry
+  tracking?: TrackingTimeEntry;
 }
 
 export interface CreateTimeEntry {
@@ -44,4 +44,12 @@ export interface EditTimeEntry {
   note?: string;
   user_id?: number;
   locked?: boolean;
+}
+
+export interface GrouppedTimeEntries {
+  name: string;
+  items?: GrouppedTimeEntries[];
+  entry?: TimeEntry;
+  serviceName?: string;
+  minutes: number;
 }

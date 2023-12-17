@@ -36,7 +36,6 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
     ProjectCodePipe,
     ServiceNamePipe,
     ConditionalFlagPipe,
-    CardComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +49,7 @@ import { CascadeSelectModule } from 'primeng/cascadeselect';
     BrowserAnimationsModule,
     ChartModule,
     CascadeSelectModule,
+    CardComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

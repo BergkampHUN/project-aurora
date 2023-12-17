@@ -1,12 +1,28 @@
 <div class="default-card card-wrapper">
-  <div class="flex align-items-center test">
-    <h2>Today</h2>
-    <i class="pi pi-check-circle"></i>
+  <div class="flex align-items-center gap-2 test">
+    <p-button
+      icon="pi pi-chevron-left"
+      size="small"
+      *ngIf="dateSelector"
+      [rounded]="true"
+      [text]="true"
+      (onClick)="changeDate(-1)"></p-button>
+    <div class="flex align-items-center gap-2">
+      <h2>{{ date | niceDateName }}</h2>
+      <i class="pi pi-check-circle"></i>
+    </div>
+    <p-button
+      icon="pi pi-chevron-right"
+      size="small"
+      *ngIf="dateSelector"
+      [rounded]="true"
+      [text]="true"
+      (onClick)="changeDate(1)"></p-button>
   </div>
   <div class="flex justify-content-between time-tracker-main">
     <div class="time-tracker-main-left-side">
       <div>Total Tracked Hours</div>
-      <span class="time-bold chivo">05:36</span>
+      <span class="time-bold chivo">{{ totalTrackedMinutes | hoursAndMinutes }}</span>
       <div>TimeTac</div>
       <span class="time-bold chivo">05:47</span>
     </div>
@@ -42,52 +58,5 @@
       [options]="chartOptions"
       [style]="{ width: '25%' }"></p-chart>
   </div>
-  <div class="flex justify-content-between">
-    <div>Dispo.xyz/Fridu ORINV-420</div>
-    <div class="time-bold chivo">04:39</div>
-  </div>
-  <div>
-    <div class="flex justify-content-between">
-      <div>Development</div>
-      <div class="time-bold chivo">02:11</div>
-    </div>
-    <div class="flex justify-content-between">
-      <div># 164 Vehicle dialog with new features and displayed as a side-panel</div>
-      <div class="chivo">01:39</div>
-    </div>
-    <div class="flex justify-content-between">
-      <div>#149 Add "Organization" field to case details sections</div>
-      <div class="chivo">00:32</div>
-    </div>
-  </div>
-  <div>
-    <div class="flex justify-content-between">
-      <div>Meeting</div>
-      <div class="time-bold chivo">02:38</div>
-    </div>
-    <div class="flex justify-content-between">
-      <div>Daily</div>
-      <div class="time-bold chivo">00:17</div>
-    </div>
-    <div class="flex justify-content-between">
-      <div>Meeting with Robert about the last feedback from BW</div>
-      <div class="chivo">02:11</div>
-    </div>
-  </div>
-
-  <div class="flex justify-content-between">
-    <div>OR/Website ORINV-420</div>
-    <div class="time-bold chivo">00:57</div>
-  </div>
-  <div>
-    <div class="flex justify-content-between">
-      <div>Development</div>
-      <div class="time-bold chivo">00:57</div>
-    </div>
-
-    <div class="flex justify-content-between">
-      <div>Add new Croatian HQ to the addresses</div>
-      <div class="chivo">00:57</div>
-    </div>
-  </div>
+  <app-time-entry *ngFor="let entry of groupedTimeEntries" [timeEntryGroup]="entry" />
 </div>

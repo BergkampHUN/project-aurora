@@ -2,8 +2,8 @@
   <app-header></app-header>
   <app-working-on></app-working-on>
   <div class="flex justify-content-between cards">
-    <app-card class="flex-grow"></app-card>
-    <app-card class="flex-grow"></app-card>
+    <app-card class="flex-grow" [date]="today"></app-card>
+    <app-card class="flex-grow" [date]="yesterday" [dateSelector]="true"></app-card>
   </div>
   <router-outlet></router-outlet>
 </div>

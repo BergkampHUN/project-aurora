@@ -1,0 +1,11 @@
+.entry-line {
+  transition: background-color 0.11s linear;
+  &:hover {
+    background-color: var(--cyan-100);
+  }
+
+  &:not(.entry) {
+    cursor: pointer;
+    user-select: none;
+  }
+}

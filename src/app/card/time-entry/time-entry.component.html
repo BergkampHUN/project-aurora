@@ -1,0 +1,21 @@
+<div
+  class="flex justify-content-between align-items-center entry-line py-1 px-2 border-round gap-2"
+  [ngClass]="{ entry: timeEntryGroup.entry }"
+  (click)="lineClicked()">
+  <div class="flex align-items-center gap-2">
+    <i
+      class="chevron pi"
+      *ngIf="!timeEntryGroup.entry"
+      [ngClass]="{ 'pi-chevron-right': collapsed, 'pi-chevron-down': !collapsed }"></i>
+    <div class="text-base" [ngClass]="{ 'font-bold': !timeEntryGroup.entry }">
+      {{ timeEntryGroup.entry ? timeEntryGroup.entry.note || '-' : timeEntryGroup.name }}
+    </div>
+  </div>
+  <div class="time-bold text-base chivo">{{ timeEntryGroup.minutes | hoursAndMinutes }}</div>
+</div>
+<ng-container *ngIf="!collapsed">
+  <app-time-entry
+    class="block ml-3"
+    *ngFor="let entry of timeEntryGroup.items"
+    [timeEntryGroup]="entry"></app-time-entry>
+</ng-container>
