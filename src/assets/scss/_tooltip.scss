@@ -1,0 +1,168 @@
+.service-tooltip {
+  .p-tooltip-text {
+    font-size: 14px;
+  }
+
+  &.cyan {
+    .p-tooltip-arrow {
+      border-top-color: var(--cyan-100, #c3edf5);
+    }
+    .p-tooltip-text {
+      color: var(--cyan-500, #06b6d4);
+      background-color: var(--cyan-100, #c3edf5);
+    }
+  }
+  &.purple {
+    .p-tooltip-arrow {
+      border-top-color: var(--purple-100, #ead6fd);
+    }
+    .p-tooltip-text {
+      color: var(--purple-500, #a855f7);
+      background-color: var(--purple-100, #ead6fd);
+    }
+  }
+  &.pink {
+    .p-tooltip-arrow {
+      border-top-color: var(--pink-100, #fad3e7);
+    }
+    .p-tooltip-text {
+      color: var(--pink-500, #ec4899);
+      background-color: var(--pink-100, #fad3e7);
+    }
+  }
+  &.yellow {
+    .p-tooltip-arrow {
+      border-top-color: var(--yellow-100, #faedc4);
+    }
+    .p-tooltip-text {
+      color: var(--yellow-500, #eab308);
+      background-color: var(--yellow-100, #faedc4);
+    }
+  }
+  &.green {
+    .p-tooltip-arrow {
+      border-top-color: var(--green-100, #caf1d8);
+    }
+    .p-tooltip-text {
+      color: var(--green-500, #22c55e);
+      background-color: var(--green-100, #caf1d8);
+    }
+  }
+  &.indigo {
+    .p-tooltip-arrow {
+      border-top-color: var(--indigo-100, #dadafc);
+    }
+    .p-tooltip-text {
+      color: var(--indigo-500, #6366f1);
+      background-color: var(--indigo-100, #dadafc);
+    }
+  }
+  &.teal {
+    .p-tooltip-arrow {
+      border-top-color: var(--teal-100, #c7eeea);
+    }
+    .p-tooltip-text {
+      color: var(--teal-500, #14b8a6);
+      background-color: var(--teal-100, #c7eeea);
+    }
+  }
+  &.orange {
+    .p-tooltip-arrow {
+      border-top-color: var(--orange-100, #feddc7);
+    }
+    .p-tooltip-text {
+      color: var(--orange-500, #f97316);
+      background-color: var(--orange-100, #feddc7);
+    }
+  }
+  &.bluegray {
+    .p-tooltip-arrow {
+      border-top-color: var(--bluegray-100, #dadee3);
+    }
+    .p-tooltip-text {
+      color: var(--bluegray-500, #64748b);
+      background-color: var(--bluegray-100, #dadee3);
+    }
+  }
+  &.purple {
+    .p-tooltip-arrow {
+      border-top-color: var(--purple-100, #ead6fd);
+    }
+    .p-tooltip-text {
+      color: var(--purple-500, #a855f7);
+      background-color: var(--purple-100, #ead6fd);
+    }
+  }
+  &.red {
+    .p-tooltip-arrow {
+      border-top-color: var(--red-100, #ffd0ce);
+    }
+    .p-tooltip-text {
+      color: var(--red-500, #ff3d32);
+      background-color: var(--red-100, #ffd0ce);
+    }
+  }
+  &.rose {
+    .p-tooltip-arrow {
+      border-top-color: var(--rose-100, #d9c1c8);
+    }
+    .p-tooltip-text {
+      color: var(--rose-500, #cc3363);
+      background-color: var(--rose-100, #d9c1c8);
+    }
+  }
+  &.brown {
+    .p-tooltip-arrow {
+      border-top-color: var(--brown-100, #e6ddd8);
+    }
+    .p-tooltip-text {
+      color: var(--brown-500, #b96d40);
+      background-color: var(--brown-100, #e6ddd8);
+    }
+  }
+  &.blue {
+    .p-tooltip-arrow {
+      border-top-color: var(--blue-100, #d0e1fd);
+    }
+    .p-tooltip-text {
+      color: var(--blue-500, #3b82f6);
+      background-color: var(--blue-100, #d0e1fd);
+    }
+  }
+  &.darkgreen {
+    .p-tooltip-arrow {
+      border-top-color: var(--darkgreen-100, #c7d8c2);
+    }
+    .p-tooltip-text {
+      color: var(--darkgreen-500, #495f41);
+      background-color: var(--darkgreen-100, #c7d8c2);
+    }
+  }
+  &.blue2 {
+    .p-tooltip-arrow {
+      border-top-color: var(--blue2-100, #b5e3e6);
+    }
+    .p-tooltip-text {
+      color: var(--blue2-500, #1ccad8);
+      background-color: var(--blue2-100, #b5e3e6);
+    }
+  }
+  &.darkpurple {
+    .p-tooltip-arrow {
+      border-top-color: var(--darkpurple-100, #dcd6e2);
+    }
+    .p-tooltip-text {
+      color: var(--darkpurple-500, #642ca9);
+      background-color: var(--darkpurple-100, #dcd6e2);
+    }
+  }
+  &.gray {
+    .p-tooltip-arrow {
+      border-top-color: var(--gray-100, #f3f4f6);
+    }
+    .p-tooltip-text {
+      color: var(--gray-500, #6b7280);
+      background-color: var(--gray-100, #f3f4f6);
+    }
+  }
+}

@@ -1,0 +1,63 @@
+.pi-check-circle {
+  font-size: 13px;
+  color: var(--success);
+}
+
+.time-tracker-main {
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  margin: 20px 0 30px 0;
+  padding: 6px 50px;
+}
+
+.time-tracker-main-left-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & span {
+    font-size: 24px;
+  }
+}
+
+.time-tracker-main-middle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 200px;
+  margin-top: 10px;
+  gap: 20px;
+
+  .service-time-wrapper {
+    // color: var(--cyan-500);
+    gap: 5px;
+  }
+
+  i.service-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    height: 24px;
+    width: 24px;
+    border-radius: 5px;
+  }
+
+  .pi-bolt {
+    color: var(--cyan-500);
+    background-color: var(--cyan-100);
+  }
+
+  .pi-comments {
+    color: var(--purple-500);
+    background-color: var(--purple-100);
+  }
+
+  .color-cyan {
+    color: var(--cyan-500);
+  }
+
+  .color-pruple {
+    color: var(--purple-500);
+  }
+}

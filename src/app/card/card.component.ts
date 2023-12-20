@@ -7,44 +7,26 @@ import { ChartModule } from 'primeng/chart';
 import { HoursAndMinutesPipe } from '../pipes/hours-and-minutes.pipe';
 import { NiceDateNamePipe } from '../pipes/nice-date-name.pipe';
 import { ButtonModule } from 'primeng/button';
+import { SummariesComponent } from './summaries/summaries.component';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [
-    CommonModule,
-    ChartModule,
-    TimeEntryComponent,
-    HoursAndMinutesPipe,
-    NiceDateNamePipe,
-    ButtonModule,
-  ],
+  imports: [CommonModule, TimeEntryComponent, NiceDateNamePipe, ButtonModule, SummariesComponent],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
   @Input({ required: true }) date!: Date;
   @Input() dateSelector: boolean = false;
-  data: any;
-  chartOptions: any;
+
   public groupedTimeEntries: GrouppedTimeEntries[] = [];
-  public totalTrackedMinutes: number = 0;
   private readonly miteService: MiteService = inject(MiteService);
 
   constructor() {}
 
   ngOnInit() {
     this.getTimeEntries();
-    this.data = {
-      datasets: [
-        {
-          data: [66, 0, 34],
-          // maybe create a variable service for the colors //
-          backgroundColor: ['#c3edf5', '#eafd62', '#ead6fd'],
-          hoverBackgroundColor: ['#c3edf5', '#eafd62', '#ead6fd'],
-        },
-      ],
-    };
   }
 
   public changeDate(moveDays: number): void {
@@ -54,13 +36,10 @@ export class CardComponent {
   }
 
   private getTimeEntries(): void {
-    this.miteService.getTimeEntries(this.date?.toLocaleDateString('sv')).subscribe((res) => {
-      this.groupedTimeEntries = this.miteService.groupTimeEntries(res);
-      this.totalTrackedMinutes = this.calculateTotalTrackedMinutes();
-    });
-  }
-
-  private calculateTotalTrackedMinutes(): number {
-    return this.groupedTimeEntries.reduce((acc, curr) => acc + curr.minutes, 0);
+    this.miteService
+      .getTimeEntries([{ type: 'at', value: this.date?.toLocaleDateString('sv') }])
+      .subscribe((res) => {
+        this.groupedTimeEntries = this.miteService.groupTimeEntries(res);
+      });
   }
 }

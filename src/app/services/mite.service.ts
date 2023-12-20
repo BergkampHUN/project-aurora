@@ -86,10 +86,12 @@ export class MiteService {
       .pipe(tap((res) => this._currentTracker.next({})));
   }
 
-  public getTimeEntries(date?: string): Observable<TimeEntryResponseObj[]> {
+  public getTimeEntries(
+    params: { type: string; value: string }[] = []
+  ): Observable<TimeEntryResponseObj[]> {
     let queryParams = new HttpParams();
-    if (date) {
-      queryParams = queryParams.set('at', date);
+    for (const param of params) {
+      queryParams = queryParams.set(param.type, param.value);
     }
     return this.http.get<TimeEntryResponseObj[]>(`${this.baseUrl}/time_entries.json`, {
       headers: this.headers,
@@ -151,19 +153,21 @@ export class MiteService {
     arrayPart: GrouppedTimeEntries[],
     serviceName?: string
   ): void {
-    const nameParts: string[] = timeEntry.project_name.split('/');
-    const firstPart: string = serviceName || nameParts[0].trim();
+    const [firstNamePart, ...restNameParts]: string[] = timeEntry.project_name.split('/');
+    const firstPart: string = serviceName || firstNamePart.trim();
     let groupIndex: number = arrayPart.findIndex(
       (groupedTimeEntry) => groupedTimeEntry.name === firstPart
     );
 
+    // if the group does not exist, create it
     if (groupIndex === -1) {
       arrayPart.push({ name: firstPart, items: [], minutes: 0 });
       groupIndex = arrayPart.length - 1;
     }
 
-    if (nameParts.length > 1) {
-      const secondPart: string = nameParts[1].trim();
+    // if the project name has a second part, it's a parent project
+    if (restNameParts.length > 0) {
+      const secondPart: string = restNameParts.join('/').trim();
       const reducedTimeneEntry: TimeEntry = {
         ...timeEntry,
         project_name: secondPart,

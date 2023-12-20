@@ -19,44 +19,6 @@
       [text]="true"
       (onClick)="changeDate(1)"></p-button>
   </div>
-  <div class="flex justify-content-between time-tracker-main">
-    <div class="time-tracker-main-left-side">
-      <div>Total Tracked Hours</div>
-      <span class="time-bold chivo">{{ totalTrackedMinutes | hoursAndMinutes }}</span>
-      <div>TimeTac</div>
-      <span class="time-bold chivo">05:47</span>
-    </div>
-    <div class="time-tracker-main-middle">
-      <div class="flex align-items-center service-time-wrapper">
-        <i class="pi pi-bolt"></i>
-        <span class="time-bold chivo color-cyan">02:11</span>
-      </div>
-      <div class="flex align-items-center service-time-wrapper">
-        <i class="pi pi-bolt"></i>
-        <span class="time-bold chivo color-cyan">00:24</span>
-      </div>
-      <div class="flex align-items-center service-time-wrapper">
-        <i class="pi pi-bolt"></i>
-        <span class="time-bold chivo color-cyan">00:51</span>
-      </div>
-      <div class="flex align-items-center service-time-wrapper">
-        <i class="pi pi-comments"></i>
-        <span class="time-bold chivo color-pruple">05:32</span>
-      </div>
-      <div class="flex align-items-center service-time-wrapper">
-        <i class="pi pi-bolt"></i>
-        <span class="time-bold chivo color-cyan">01:21</span>
-      </div>
-      <div class="flex align-items-center service-time-wrapper">
-        <i class="pi pi-bolt"></i>
-        <span class="time-bold chivo color-cyan">00:54</span>
-      </div>
-    </div>
-    <p-chart
-      type="doughnut"
-      [data]="data"
-      [options]="chartOptions"
-      [style]="{ width: '25%' }"></p-chart>
-  </div>
+  <app-summaries [date]="date"></app-summaries>
   <app-time-entry *ngFor="let entry of groupedTimeEntries" [timeEntryGroup]="entry" />
 </div>
